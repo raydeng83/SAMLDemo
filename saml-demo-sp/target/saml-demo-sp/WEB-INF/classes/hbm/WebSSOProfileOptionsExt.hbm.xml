@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class table="WEBSSO_PROFILE_OPTIONS_EXT" name="com.oscgc.security.saml.websso.WebSSOProfileOptionsExt">
+		<id name="entityId" column="Entity_Id">
+		</id>
+		<property name="binding" length="256" column="BINDING"/>
+		<property name="providerName" length="256" column="PROVIDER_NAME"/>
+		<property name="nameID" column="NAME_ID"/>
+		<property name="allowCreate" column="ALLOW_CREATE"/>
+		<property name="forceAuthN" column="FORCE_AUTHN"/>
+		<property name="passive" column="PASSIVE"/>
+		<property name="includeScoping" column="INCLUDE_SCOPING"/>
+		<property name="proxyCount" column="PROXY_COUNT"/>
+		<property name="relayState" column="RELAY_STATE"/>
+	</class>
+</hibernate-mapping>

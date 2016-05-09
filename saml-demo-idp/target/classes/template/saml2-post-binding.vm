@@ -1,0 +1,66 @@
+##
+## Velocity Template for SAML 2 HTTP-POST binding
+##
+## Velocity context may contain the following properties
+## action - String - the action URL for the form
+## RelayState - String - the relay state for the message
+## SAMLRequest - String - the Base64 encoded SAML Request
+## SAMLResponse - String - the Base64 encoded SAML Response
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet"
+          href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet"
+          href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-theme.min.css">
+
+
+    <title>${pageTitle}</title>
+</head>
+<body>
+<noscript>
+    <p>
+        <strong>Note:</strong> Since your browser does not support JavaScript,
+        you must press the Continue button once to proceed.
+    </p>
+</noscript>
+<script>
+    window.onload = function () {
+        var str = document.getElementById("SAMLResponse").value;
+        var resultXML = atob(unescape(encodeURIComponent(document.getElementById("SAMLResponse").value)));
+        document.getElementById("SAMLResponseXML").value = resultXML;
+    }
+</script>
+<div class="container">
+    <div class="page-header"><h2>SAML Response</h2></div>
+    <form action="${action}" method="post">
+        <div>
+            #if($RelayState)<input type="hidden" name="RelayState" value="${RelayState}"/>#end
+
+            #if($SAMLRequest)<input type="hidden" name="SAMLRequest" value="${SAMLRequest}"/>#end
+
+            #if($SAMLResponse)
+                <input type="hidden" id="SAMLResponse" name="SAMLResponse" value="${SAMLResponse}"/>
+                <div class="form-group">
+                    <textarea class="form-control" name="SAMLResponseXML" id="SAMLResponseXML"
+                              rows="15"></textarea>
+
+                </div>
+            #end
+
+        </div>
+        <noscript>
+            <div>
+                <input type="submit" value="Continue"/>
+            </div>
+        </noscript>
+        <div>
+            <input type="submit" value="Continue"/>
+        </div>
+    </form>
+</div>
+</body>
+</html>

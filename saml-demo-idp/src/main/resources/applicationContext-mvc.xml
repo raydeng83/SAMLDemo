@@ -1,0 +1,63 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:jee="http://www.springframework.org/schema/jee" xmlns:lang="http://www.springframework.org/schema/lang"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
+       http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-3.1.xsd
+       http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-3.1.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd">
+
+
+
+	<context:component-scan base-package="com.oscgc.security.saml.idp.web.contoller">
+		<context:include-filter expression="org.springframework.stereotype.Controller"
+			type="annotation" />
+	</context:component-scan>
+
+
+
+	<!-- HttpRequestHandler that serves static resources optimized for superior 
+		browser performance -->
+	<!-- The "locations" property takes a list of Spring Resource locations 
+		from which static resources are allowed to be served by this handler. -->
+	<!-- The use of Resource locations allows resource requests to easily be 
+		mapped to locations other than the web application root -->
+	<!-- For example, to serve resource requests with a URL pattern of "/resources/**" 
+		from "resources" directory within the web application root, the tag would 
+		be used as follows -->
+	<mvc:resources mapping="/css/**" location="/css/" />
+	<mvc:resources mapping="/js/**" location="/js/" />
+	<mvc:resources mapping="/img/**" location="/img/" />
+
+	<!-- An HttpRequestHandler for serving static files using the Servlet container's 
+		"default" Servlet. -->
+	<!-- This handler is intended to be used with a "/**" mapping when the DispatcherServlet 
+		is mapped to "/", thus overriding the Servlet container's default handling 
+		of static resources. -->
+	<!-- The mapping to this handler should generally be ordered as the last 
+		in the chain so that it will only execute when no other more specific mappings 
+		(i.e., to controllers) can be matched. -->
+	<!-- Requests are handled by forwarding through the RequestDispatcher obtained 
+		via the name specified through the "default-servlet-name" attribute. -->
+	<!-- In most cases, "default-servlet-name" does not need to be set explicitly, 
+		as the handler checks at initialization time for the presence of the default 
+		Servlet of well-known containers such as Tomcat, etc. 
+	<mvc:default-servlet-handler
+		default-servlet-name="_ah_default" />
+-->
+	<mvc:annotation-driven />
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/views/" />
+		<property name="suffix" value=".jsp" />
+		<property name="order" value="2" />
+	</bean>
+
+</beans>

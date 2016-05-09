@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="saml-demo-sp:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="saml-demo-sp.war">
+      <element id="artifact" artifact-name="saml-demo-sp:war exploded" />
+    </root>
+  </artifact>
+</component>
